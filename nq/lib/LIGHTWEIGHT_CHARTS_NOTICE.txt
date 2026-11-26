@@ -1,0 +1,4 @@
+TradingView Lightweight Charts (TM)
+Copyright (c) TradingView, Inc. https://www.tradingview.com/
+Licensed under the Apache License 2.0 (see LIGHTWEIGHT_CHARTS_LICENSE.txt).
+Non-ASCII characters in the bundled file were rewritten as \uXXXX escapes; behaviour is unchanged.
