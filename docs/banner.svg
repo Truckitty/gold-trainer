@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="310" viewBox="0 0 1200 310" role="img" aria-label="GC x NQ Futures K-Line Replay Trainer Suite">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090e17"/>
+      <stop offset="52%" stop-color="#0f1726"/>
+      <stop offset="100%" stop-color="#0a111d"/>
+    </linearGradient>
+    <radialGradient id="glowGC" cx="15%" cy="18%" r="48%">
+      <stop offset="0%" stop-color="#ffcc00" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffcc00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowNQ" cx="85%" cy="22%" r="48%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lineGC" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffcc00" stop-opacity="0.1"/>
+      <stop offset="55%" stop-color="#ffcc00" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="lineNQ" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#7dd3fc" stop-opacity="0.3"/>
+    </linearGradient>
+    <clipPath id="clipCard">
+      <rect x="0" y="0" width="1200" height="310" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#clipCard)">
+    <rect width="1200" height="310" fill="url(#bg)"/>
+    <rect width="1200" height="310" fill="url(#glowGC)"/>
+    <rect width="1200" height="310" fill="url(#glowNQ)"/>
+
+    <!-- Subtle Swiss architectural grid -->
+    <g stroke="#1d2a3f" stroke-width="1" opacity="0.55">
+      <line x1="0" y1="62" x2="1200" y2="62"/>
+      <line x1="0" y1="124" x2="1200" y2="124"/>
+      <line x1="0" y1="186" x2="1200" y2="186"/>
+      <line x1="0" y1="248" x2="1200" y2="248"/>
+      <line x1="240" y1="0" x2="240" y2="310"/>
+      <line x1="480" y1="0" x2="480" y2="310"/>
+      <line x1="720" y1="0" x2="720" y2="310"/>
+      <line x1="960" y1="0" x2="960" y2="310"/>
+    </g>
+
+    <!-- Stylized right-side candlestick artwork -->
+    <g transform="translate(745, 42)" opacity="0.92">
+      <!-- Subtle panel frame -->
+      <rect x="0" y="0" width="415" height="226" rx="12" fill="#0b1220" fill-opacity="0.82" stroke="#23344d" stroke-width="1.2"/>
+      <!-- Header strip -->
+      <line x1="0" y1="34" x2="415" y2="34" stroke="#1e2d44" stroke-width="1"/>
+      <circle cx="18" cy="17" r="4" fill="#ffcc00"/>
+      <text x="29" y="21" font-family="ui-monospace,Consolas,monospace" font-size="11" font-weight="700" fill="#fde68a">GC 1m</text>
+      <circle cx="96" cy="17" r="4" fill="#38bdf8"/>
+      <text x="107" y="21" font-family="ui-monospace,Consolas,monospace" font-size="11" font-weight="700" fill="#bae6fd">NQ 1m</text>
+      <text x="398" y="21" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="10.5" fill="#64748b">BLIND REPLAY</text>
+
+      <!-- Killzone translucent box -->
+      <rect x="148" y="46" width="128" height="148" rx="4" fill="#38bdf8" fill-opacity="0.07" stroke="#38bdf8" stroke-opacity="0.25" stroke-dasharray="3,3"/>
+      <text x="156" y="61" font-family="ui-monospace,Consolas,monospace" font-size="9.5" font-weight="700" fill="#7dd3fc" opacity="0.8">NY KILLZONE</text>
+
+      <!-- TP / Entry / SL horizontal trade lines -->
+      <line x1="16" y1="74" x2="399" y2="74" stroke="#10b981" stroke-width="1.2" stroke-dasharray="4,3"/>
+      <rect x="334" y="64" width="60" height="18" rx="3" fill="#064e3b"/>
+      <text x="364" y="76" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9.5" font-weight="700" fill="#6ee7b7">TP +2.0R</text>
+
+      <line x1="16" y1="138" x2="399" y2="138" stroke="#38bdf8" stroke-width="1.2"/>
+      <rect x="334" y="128" width="60" height="18" rx="3" fill="#0c4a6e"/>
+      <text x="364" y="140" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9.5" font-weight="700" fill="#7dd3fc">LONG 2x</text>
+
+      <line x1="16" y1="176" x2="399" y2="176" stroke="#f43f5e" stroke-width="1.2" stroke-dasharray="4,3"/>
+      <rect x="334" y="166" width="60" height="18" rx="3" fill="#4c0519"/>
+      <text x="364" y="178" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="9.5" font-weight="700" fill="#fda4af">SL -1.0E</text>
+
+      <!-- Candles -->
+      <g stroke-width="1.6">
+        <line x1="36" y1="146" x2="36" y2="184" stroke="#10b981"/><rect x="31" y="156" width="10" height="20" rx="1.5" fill="#10b981"/>
+        <line x1="56" y1="140" x2="56" y2="174" stroke="#f43f5e"/><rect x="51" y="148" width="10" height="18" rx="1.5" fill="#f43f5e"/>
+        <line x1="76" y1="146" x2="76" y2="186" stroke="#f43f5e"/><rect x="71" y="158" width="10" height="19" rx="1.5" fill="#f43f5e"/>
+        <line x1="96" y1="138" x2="96" y2="176" stroke="#10b981"/><rect x="91" y="145" width="10" height="22" rx="1.5" fill="#10b981"/>
+        <line x1="116" y1="132" x2="116" y2="162" stroke="#10b981"/><rect x="111" y="138" width="10" height="16" rx="1.5" fill="#10b981"/>
+        <line x1="136" y1="136" x2="136" y2="168" stroke="#f43f5e"/><rect x="131" y="142" width="10" height="17" rx="1.5" fill="#f43f5e"/>
+        <line x1="156" y1="126" x2="156" y2="166" stroke="#10b981"/><rect x="151" y="136" width="10" height="22" rx="1.5" fill="#10b981"/>
+        <line x1="176" y1="114" x2="176" y2="148" stroke="#10b981"/><rect x="171" y="122" width="10" height="18" rx="1.5" fill="#10b981"/>
+        <line x1="196" y1="118" x2="196" y2="146" stroke="#f43f5e"/><rect x="191" y="124" width="10" height="13" rx="1.5" fill="#f43f5e"/>
+        <line x1="216" y1="98" x2="216" y2="136" stroke="#10b981"/><rect x="211" y="106" width="10" height="24" rx="1.5" fill="#10b981"/>
+        <line x1="236" y1="88" x2="236" y2="120" stroke="#10b981"/><rect x="231" y="96" width="10" height="16" rx="1.5" fill="#10b981"/>
+        <line x1="256" y1="92" x2="256" y2="118" stroke="#f43f5e"/><rect x="251" y="96" width="10" height="14" rx="1.5" fill="#f43f5e"/>
+        <line x1="276" y1="74" x2="276" y2="108" stroke="#10b981"/><rect x="271" y="80" width="10" height="22" rx="1.5" fill="#10b981"/>
+        <line x1="296" y1="62" x2="296" y2="96" stroke="#10b981"/><rect x="291" y="68" width="10" height="20" rx="1.5" fill="#10b981"/>
+        <line x1="316" y1="66" x2="316" y2="94" stroke="#ffcc00"/><rect x="311" y="72" width="10" height="14" rx="1.5" fill="#ffcc00"/>
+      </g>
+
+      <!-- Dual EMA curves -->
+      <path d="M 26 172 C 88 164, 146 154, 206 126 C 254 104, 290 88, 326 78" fill="none" stroke="url(#lineNQ)" stroke-width="2.2"/>
+      <path d="M 26 184 C 98 178, 162 166, 224 146 C 266 130, 298 114, 326 102" fill="none" stroke="url(#lineGC)" stroke-width="2"/>
+
+      <!-- Bottom telemetry strip -->
+      <line x1="0" y1="196" x2="415" y2="196" stroke="#1e2d44" stroke-width="1"/>
+      <text x="16" y="214" font-family="ui-monospace,Consolas,monospace" font-size="10.5" fill="#94a3b8">2018-10 .. 2026-11</text>
+      <text x="399" y="214" text-anchor="end" font-family="ui-monospace,Consolas,monospace" font-size="10.5" font-weight="700" fill="#10b981">DV +0.18R &#xB7; 5.73M BARS</text>
+    </g>
+
+    <!-- Left hero typography -->
+    <g transform="translate(52, 46)">
+      <!-- Top pill -->
+      <rect x="0" y="0" width="322" height="28" rx="14" fill="#131e30" stroke="#2c3e5a" stroke-width="1"/>
+      <circle cx="16" cy="14" r="4.5" fill="#ffcc00"/>
+      <circle cx="30" cy="14" r="4.5" fill="#38bdf8"/>
+      <text x="44" y="18" font-family="ui-monospace,Consolas,monospace" font-size="11.5" font-weight="700" letter-spacing="1.2" fill="#cbd5e1">FUTURES 1-MIN REPLAY SUITE</text>
+
+      <!-- Main title -->
+      <text x="0" y="92" font-family="'Microsoft YaHei','PingFang SC','Segoe UI',sans-serif" font-size="46" font-weight="900" fill="#f8fafc">
+        <tspan fill="#ffcc00">黄金 GC</tspan><tspan fill="#475569"> &#xD7; </tspan><tspan fill="#38bdf8">纳指 NQ</tspan>
+      </text>
+      <text x="0" y="144" font-family="'Microsoft YaHei','PingFang SC','Segoe UI',sans-serif" font-size="38" font-weight="800" fill="#e2e8f0">期货 K 线复盘训练器</text>
+
+      <!-- Subtitle -->
+      <text x="0" y="182" font-family="'Microsoft YaHei','PingFang SC','Segoe UI',sans-serif" font-size="15.5" fill="#94a3b8">8 年真实 1 分钟连续合约行情 &#xB7; 盲测打分 &#xB7; 仿 Topstep 实战风控 &#xB7; 离线 PWA</text>
+
+      <!-- Bottom metric chips -->
+      <g transform="translate(0, 202)">
+        <rect x="0" y="0" width="150" height="32" rx="7" fill="#171f2e" stroke="#ffcc00" stroke-opacity="0.45"/>
+        <text x="75" y="21" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="12.5" font-weight="800" fill="#fde68a">GC / MGC &#xB7; 2,081d</text>
+
+        <rect x="162" y="0" width="156" height="32" rx="7" fill="#111f32" stroke="#38bdf8" stroke-opacity="0.5"/>
+        <text x="240" y="21" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="12.5" font-weight="800" fill="#bae6fd">NQ / MNQ &#xB7; 2,083d</text>
+
+        <rect x="330" y="0" width="150" height="32" rx="7" fill="#10221f" stroke="#10b981" stroke-opacity="0.45"/>
+        <text x="405" y="21" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-size="12.5" font-weight="800" fill="#6ee7b7">PC + iPhone PWA</text>
+      </g>
+    </g>
+
+    <!-- Outer crisp border -->
+    <rect x="0.75" y="0.75" width="1198.5" height="308.5" rx="17.5" fill="none" stroke="#25344d" stroke-width="1.5"/>
+  </g>
+</svg>

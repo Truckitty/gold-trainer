@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090d14">
+<meta name="description" content="2018-2026 真实 COMEX 黄金 (GC/MGC) 与 CME 纳指 100 (NQ/MNQ) 1 分钟期货 K 线盲测复盘训练套件，支持电脑端与 iPhone 离线 PWA。">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>GC &times; NQ 期货 K 线复盘训练套件</title>
+<style>
+:root {
+  --bg: #080c13;
+  --panel: #101622;
+  --panel-hi: #151e2e;
+  --line: #1f2b3e;
+  --line-hi: #2f405c;
+  --fg: #f1f5f9;
+  --fg2: #cbd5e1;
+  --muted: #8293ab;
+  --gc: #ffcc00;
+  --gc-dim: rgba(255, 204, 0, .12);
+  --gc-bd: rgba(255, 204, 0, .38);
+  --nq: #38bdf8;
+  --nq-dim: rgba(56, 189, 248, .12);
+  --nq-bd: rgba(56, 189, 248, .38);
+  --up: #10b981;
+  --mono: "SF Mono","JetBrains Mono","Cascadia Mono",Consolas,ui-monospace,monospace;
+  --sans: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+  color-scheme: dark;
+}
+body {
+  background-image:
+    radial-gradient(640px 340px at 14% 0%, rgba(255, 204, 0, .09), transparent 72%),
+    radial-gradient(640px 340px at 86% 0%, rgba(56, 189, 248, .10), transparent 72%);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 22px 54px;
+}
+
+/* Top bar */
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 11px;
+  border-radius: 9px;
+  background: var(--panel);
+  border: 1px solid var(--line-hi);
+  font-family: var(--mono);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: .02em;
+}
+.logo .g { color: var(--gc); }
+.logo .x { color: var(--muted); font-weight: 500; }
+.logo .n { color: var(--nq); }
+.brand-txt h1 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.015em;
+}
+.brand-txt p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-family: var(--mono);
+}
+.top-act {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ghbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: var(--fg2);
+  background: var(--panel);
+  border: 1px solid var(--line-hi);
+  border-radius: 8px;
+  padding: 8px 13px;
+  font-size: 12.5px;
+  font-weight: 700;
+  transition: all .15s ease;
+  cursor: pointer;
+}
+.ghbtn:hover { background: var(--panel-hi); color: var(--fg); border-color: #4b6185; }
+.ghbtn svg { width: 15px; height: 15px; fill: currentColor; }
+
+/* Hero intro */
+.hero {
+  padding: 34px 0 26px;
+}
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--fg2);
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line-hi);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.kicker .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--up);
+  box-shadow: 0 0 8px var(--up);
+}
+.hero h2 {
+  margin-top: 16px;
+  font-size: clamp(28px, 4.4vw, 46px);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -.03em;
+}
+.hero h2 .hl-gc { color: var(--gc); }
+.hero h2 .hl-nq { color: var(--nq); }
+.hero .lead {
+  margin-top: 12px;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--fg2);
+}
+
+/* Dual Launch Cards */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 8px;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line-hi);
+  border-radius: 14px;
+  padding: 24px 24px 22px;
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.45); }
+.card.gc {
+  border-top: 3px solid var(--gc);
+  background: linear-gradient(180deg, rgba(255, 204, 0, .06), var(--panel) 44%);
+}
+.card.gc:hover { border-color: var(--gc-bd); border-top-color: var(--gc); }
+.card.nq {
+  border-top: 3px solid var(--nq);
+  background: linear-gradient(180deg, rgba(56, 189, 248, .07), var(--panel) 44%);
+}
+.card.nq:hover { border-color: var(--nq-bd); border-top-color: var(--nq); }
+
+.chead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cicon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--line-hi);
+  overflow: hidden;
+  flex: 0 0 auto;
+  background: #0d121c;
+}
+.cicon img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.ctitle-wrap { flex: 1; }
+.ctag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+.card.gc .ctag { background: var(--gc-dim); color: var(--gc); border: 1px solid var(--gc-bd); }
+.card.nq .ctag { background: var(--nq-dim); color: var(--nq); border: 1px solid var(--nq-bd); }
+.ctitle {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+}
+.csub {
+  font-size: 13.5px;
+  color: var(--fg2);
+  line-height: 1.62;
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.specs div span {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.specs div strong {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--fg);
+  white-space: nowrap;
+}
+
+.feats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 12px;
+  font-size: 12.5px;
+  color: var(--fg2);
+}
+.feats li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.feats li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+.card.gc .feats li::before { background: var(--gc); }
+.card.nq .feats li::before { background: var(--nq); }
+
+.cact {
+  margin-top: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.cta {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  padding: 13px 16px;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 800;
+  transition: filter .15s ease, transform .1s ease;
+}
+.cta:hover { filter: brightness(1.08); }
+.cta:active { transform: translateY(1px); }
+.card.gc .cta { background: var(--gc); color: #121417; }
+.card.nq .cta { background: var(--nq); color: #05131f; }
+.copybtn {
+  border: 1px solid var(--line-hi);
+  background: rgba(255,255,255,.03);
+  color: var(--fg2);
+  border-radius: 9px;
+  padding: 13px 13px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .14s ease;
+}
+.copybtn:hover { background: var(--panel-hi); color: var(--fg); border-color: #4b6185; }
+
+/* Pillars strip */
+.sec-title {
+  margin-top: 34px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.sec-title h3 {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: var(--fg);
+}
+.sec-title span {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.pil {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+}
+.pil .num {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: .12em;
+}
+.pil h4 {
+  margin-top: 6px;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--fg);
+}
+.pil p {
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Mobile & Share strip */
+.sharebox {
+  margin-top: 18px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sharebox .txt { font-size: 13px; line-height: 1.6; color: var(--fg2); max-width: 64ch; }
+.sharebox .txt b { color: var(--fg); }
+.sharebox .btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.foot {
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}
+.foot a { color: var(--fg2); text-decoration: none; border-bottom: 1px dashed var(--line-hi); }
+.foot a:hover { color: var(--fg); }
+
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: #172336;
+  color: var(--fg);
+  border: 1px solid var(--nq-bd);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0,0,0,.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 90;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+
+@media (max-width: 860px) {
+  .cards { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 540px) {
+  .wrap { padding: 18px 15px 40px; }
+  .card { padding: 18px; }
+  .specs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .feats { grid-template-columns: 1fr; }
+  .pillars { grid-template-columns: 1fr; }
+  .cact { flex-direction: column; align-items: stretch; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="logo"><span class="g">GC</span><span class="x">&times;</span><span class="n">NQ</span></div>
+      <div class="brand-txt">
+        <h1>期货 K 线复盘训练套件</h1>
+        <p>2018-10 &mdash; 2026-11 &middot; 5.73M 1-MIN BARS &middot; STATIC PWA</p>
+      </div>
+    </div>
+    <div class="top-act">
+      <button class="ghbtn" type="button" id="copyHub">复制分享链接</button>
+      <a class="ghbtn" href="https://github.com/Truckitty/gold-trainer" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub 仓库
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="kicker"><span class="dot"></span>OPEN-SOURCE FUTURES REPLAY SUITE</div>
+    <h2>用真实 8 年分钟线，打磨 <span class="hl-gc">黄金 GC</span> 与 <span class="hl-nq">纳指 NQ</span> 的日内交易决策</h2>
+    <p class="lead">零后端、免注册、开箱即用。两款训练器共享同一套严谨的统计评估体系（盲测防作弊、真实滑点手续费、反向影子单方向价值 DV 与仿 Topstep 动态回撤），但各自保持完全独立的数据缓存与存档空间，互不干扰。</p>
+  </section>
+
+  <section class="cards">
+    <article class="card gc">
+      <div class="chead">
+        <div class="ctitle-wrap">
+          <span class="ctag">COMEX GOLD &middot; GC / MGC</span>
+          <h3 class="ctitle">黄金 K 线训练器</h3>
+        </div>
+        <div class="cicon"><img src="icons/icon-192.png" alt="Gold Trainer Icon"></div>
+      </div>
+      <p class="csub">经典瑞士国际极简风，完整覆盖 2018&ndash;2026 年 COMEX 黄金期货 1 分钟行情，专注亚欧盘与美盘流动性结构、开盘区间与纪律化止损止盈训练。</p>
+      <div class="specs">
+        <div><span>历史样本</span><strong>2,081 交易日</strong></div>
+        <div><span>最小跳动</span><strong>0.10 点</strong></div>
+        <div><span>微型合约</span><strong>MGC $10/点</strong></div>
+        <div><span>标准合约</span><strong>GC $100/点</strong></div>
+      </div>
+      <ul class="feats">
+        <li>纪律 / 实战双锁定模式</li>
+        <li>1m &ndash; 4h 多周期即时聚合</li>
+        <li>EMA / BOLL / MACD / ICT KZ</li>
+        <li>方向价值 DV &amp; 95% 置信区间</li>
+        <li>拖拽挂单线 / 止损止盈线</li>
+        <li>iPhone Safari 离线 PWA 支持</li>
+      </ul>
+      <div class="cact">
+        <a class="cta" href="./">进入黄金训练器 &rarr;</a>
+        <button class="copybtn" type="button" data-copy="./">复制链接</button>
+      </div>
+    </article>
+
+    <article class="card nq">
+      <div class="chead">
+        <div class="ctitle-wrap">
+          <span class="ctag">CME NASDAQ-100 &middot; NQ / MNQ</span>
+          <h3 class="ctitle">纳指 NQ K 线训练器</h3>
+        </div>
+        <div class="cicon"><img src="nq/icons/icon-192.png" alt="NQ Trainer Icon"></div>
+      </div>
+      <p class="csub">全新高效率量化终端交互，完整内置 2018&ndash;2026 年 CME 纳指 100 期货 1 分钟行情，针对高波动科技股指强化快捷定仓、一键图上选价挂单与 Topstep 风控演练。</p>
+      <div class="specs">
+        <div><span>历史样本</span><strong>2,083 交易日</strong></div>
+        <div><span>最小跳动</span><strong>0.25 点</strong></div>
+        <div><span>微型合约</span><strong>MNQ $2/点</strong></div>
+        <div><span>标准合约</span><strong>NQ $20/点</strong></div>
+      </div>
+      <ul class="feats">
+        <li>快捷止损 (0.5E&ndash;2E) &amp; 止盈 (1R&ndash;3R)</li>
+        <li>一键图上点选挂单 (Click-to-Order)</li>
+        <li>前日高低点 PDH/PDL/PC 叠加</li>
+        <li>快捷键速查面板 (?) 与多档快进</li>
+        <li>Topstep 追踪回撤 &amp; 保风险加仓</li>
+        <li>独立 nqkt 存档 &amp; 离线 PWA</li>
+      </ul>
+      <div class="cact">
+        <a class="cta" href="nq/">进入纳指训练器 &rarr;</a>
+        <button class="copybtn" type="button" data-copy="nq/">复制链接</button>
+      </div>
+    </article>
+  </section>
+
+  <div class="sec-title">
+    <h3>为什么用这套训练器做复盘？</h3>
+    <span>QUANTITATIVE PRACTICE DESIGN</span>
+  </div>
+  <section class="pillars">
+    <div class="pil">
+      <div class="num">01 / BLIND TEST</div>
+      <h4>盲测防作弊机制</h4>
+      <p>默认隐藏真实日期并将价格线性平移重标，杜绝“看价格认出历史行情”的后视镜幻觉；复盘时可随时还原真实日期。</p>
+    </div>
+    <div class="pil">
+      <div class="num">02 / REALISTIC FILL</div>
+      <h4>保守撮合与滑点税</h4>
+      <p>市价单按次根开盘价 + 滑点成交，限价单需多穿透 1 跳，同根 K 线强制先判止损再判止盈，逼近真实盘面损耗。</p>
+    </div>
+    <div class="pil">
+      <div class="num">03 / DIRECTION VALUE</div>
+      <h4>方向价值 (DV) 统计学审计</h4>
+      <p>每开一单同步在后台记录“反向影子单”，持续计算 95% 置信区间与 t 统计量，帮你客观检验是真有优势还是靠运气。</p>
+    </div>
+    <div class="pil">
+      <div class="num">04 / PROP FIRM DRILL</div>
+      <h4>仿 Topstep 考核与双端离线</h4>
+      <p>内置动态追踪爆仓线、宏观新闻日（FOMC/非农/CPI）过滤与跳过反事实统计；iPhone 添加至主屏幕后断网也能随时刷题。</p>
+    </div>
+  </section>
+
+  <section class="sharebox">
+    <div class="txt">
+      <b>iPhone 离线安装提示：</b>点击进入任意训练器后，在 Safari 底部点「分享」&rarr;「添加到主屏幕」。首次打开会在 Wi-Fi 下自动缓存约 12&ndash;13 MB 压缩数据包，之后无网络也可流畅使用；两款训练器可各自生成独立桌面图标。
+    </div>
+    <div class="btns">
+      <button class="ghbtn" type="button" data-copy="./">复制黄金版地址</button>
+      <button class="ghbtn" type="button" data-copy="nq/">复制纳指版地址</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div>仅用于交易复盘与纪律训练，不构成任何投资建议。记录默认保存在当前浏览器本地，支持 JSON / CSV 随时导出备份。</div>
+    <div>
+      Chart: <a href="https://github.com/tradingview/lightweight-charts" target="_blank" rel="noopener">TradingView Lightweight Charts</a> (Apache-2.0) &middot;
+      Killzones: LuxAlgo Port (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>)
+    </div>
+  </footer>
+</div>
+<div id="toast"></div>
+<script>
+(function () {
+  var tEl = document.getElementById('toast'), timer = null;
+  function showToast(msg) {
+    tEl.textContent = msg;
+    tEl.classList.add('show');
+    clearTimeout(timer);
+    timer = setTimeout(function () { tEl.classList.remove('show'); }, 2200);
+  }
+  function copyUrl(rel) {
+    var url = new URL(rel, location.href).href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(function () { showToast('已复制分享链接：' + url); }, function () { fallbackCopy(url); });
+    } else {
+      fallbackCopy(url);
+    }
+  }
+  function fallbackCopy(url) {
+    var ta = document.createElement('textarea');
+    ta.value = url; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('已复制分享链接：' + url); } catch (e) { showToast(url); }
+    document.body.removeChild(ta);
+  }
+  document.getElementById('copyHub').onclick = function () { copyUrl('hub.html'); };
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'), function (btn) {
+    btn.onclick = function () { copyUrl(btn.getAttribute('data-copy')); };
+  });
+})();
+</script>
+</body>
+</html>

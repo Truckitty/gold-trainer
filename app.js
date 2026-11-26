@@ -375,7 +375,7 @@
     var el = $('tfbar');
     if (!el.firstChild) {
       var add = function (html) { var d = document.createElement('div'); d.innerHTML = html; while (d.firstChild) el.appendChild(d.firstChild); };
-      add('<button class="mode" id="iMode" title="\u6a21\u5f0f\u5df2\u9501\u5b9a\uff1a\u70b9\u7ea2\u8272\u201c\u9000\u51fa\u201d\u540e\u624d\u80fd\u6362\u6a21\u5f0f"></button><span class="sym" id="tSym">\u9ec4\u91d1 GC</span>');
+      add('<button class="mode" id="iMode" title="\u6a21\u5f0f\u5df2\u9501\u5b9a\uff1a\u70b9\u7ea2\u8272\u201c\u9000\u51fa\u201d\u540e\u624d\u80fd\u6362\u6a21\u5f0f"></button><span class="sym" id="tSym">\u9ec4\u91d1 GC</span><a class="swlink" href="nq/" title="\u5207\u6362\u5230\u7eb3\u6307 NQ K\u7ebf\u8bad\u7ec3\u5668">NQ \u2197</a>');
       TFS.forEach(function (tf) { var b = document.createElement('button'); b.textContent = TF_CN[tf]; b.dataset.tf = tf; b.onclick = function () { setTf(tf); }; el.appendChild(b); });
       add('<span class="sep"></span><button class="tog" id="iEma" title="EMA 30/60/70/80/200">EMA</button><button class="tog" id="iBoll" title="\u5e03\u6797\u5e26 BOLL\uff08\u5468\u671f\u3001\u500d\u6570\u5728\u8bbe\u7f6e\u91cc\u6539\uff09">BOLL</button><button class="tog" id="iMacd">MACD</button><button class="tog" id="iKz" title="ICT Killzones\uff0815 \u5206\u949f\u53ca\u4ee5\u4e0b\u5468\u671f\u663e\u793a\uff09">KZ</button>' +
         '<span class="sep dsk"></span><span id="tbReplay" style="display:contents"></span><button class="dsk" id="iSpd" title="\u64ad\u653e\u901f\u5ea6"></button><span class="grow"></span><span id="tbNav" style="display:contents"></span>');
@@ -710,7 +710,7 @@
     var rise = function (k) { return anim ? ' rise" style="animation-delay:' + (k * 0.05).toFixed(2) + 's' : ''; };
     var nd = S.idx ? S.idx.days.length : null, dq = S.deck && S.idx ? deckQs(S.deck).length : null, c = CFG.fixed;
     var quick = ['fixed', 'open'].map(function (m) { var live = S.sess && S.sess.mode === m; return '<button class="chunky quick c-' + m + '" data-enter="' + m + '">' + SHAPE[m] + (live ? '\u7ee7\u7eed' : '\u8fdb\u5165') + MODE_CN[m] + '</button>'; }).join('');
-    var h = '<header class="igrid ihead' + rise(0) + '"><div class="c8"><div class="kick">Gold futures &middot; 1-minute replay &middot; v' + APP_VER + '</div>' +
+    var h = '<header class="igrid ihead' + rise(0) + '"><div class="c8"><div class="suitebar"><a class="sw-nq" href="nq/">\u5207\u6362\u81f3\u7eb3\u6307 NQ \u8bad\u7ec3\u5668 \u2197</a><a class="sw-hub" href="hub.html">\u53cc\u54c1\u79cd\u603b\u89c8\u9875</a></div><div class="kick">Gold futures &middot; 1-minute replay &middot; v' + APP_VER + '</div>' +
       '<h1>\u9ec4\u91d1 K \u7ebf<br><span>\u8bad\u7ec3\u5668</span></h1>' +
       '<p class="lede">\u7528 2018\u20132026 \u5e74 COMEX \u9ec4\u91d1\u7684\u771f\u5b9e 1 \u5206\u949f\u884c\u60c5\u505a\u9898\u3002\u6bcf\u4e00\u9898\u505c\u5728\u67d0\u4e00\u5929\u7684\u67d0\u4e2a\u65f6\u523b\uff1a\u4f60\u770b\u56fe\uff0c\u51b3\u5b9a\u4e70\u5165\u3001\u5356\u51fa\u8fd8\u662f\u8df3\u8fc7\uff0c\u7136\u540e\u4e00\u6839\u4e00\u6839\u5f80\u540e\u653e\uff0c\u770b\u7ed3\u679c\u3001\u8bb0\u6210\u7ee9\u3002</p></div>' +
       '<div class="c4 meta"><div class="kick" style="margin-bottom:12px">\u5feb\u901f\u5f00\u59cb</div>' + quick +

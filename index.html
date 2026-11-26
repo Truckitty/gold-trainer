@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="K&#x7EBF;&#x8BAD;&#x7EC3;">
 <meta name="theme-color" content="#121417">
-<link rel="icon" href="data:,">
+<link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <title>&#x9EC4;&#x91D1; K &#x7EBF;&#x8BAD;&#x7EC3;&#x5668;</title>
@@ -43,6 +43,14 @@ input, select { color-scheme:dark; }
 #tfbar { display:flex; align-items:center; gap:2px; padding:6px 8px; background:var(--panel); border-bottom:1px solid var(--line); overflow-x:auto; scrollbar-width:none; flex:0 0 auto; }
 #tfbar::-webkit-scrollbar { display:none; }
 #tfbar .sym { font-weight:800; padding:0 10px 0 6px; white-space:nowrap; letter-spacing:-.01em; }
+#tfbar .swlink { display:inline-flex; align-items:center; gap:4px; text-decoration:none; font-size:12px; font-weight:800; color:#38bdf8; background:rgba(56,189,248,.12); border:1px solid rgba(56,189,248,.35); border-radius:var(--r); padding:4px 9px; margin-right:6px; white-space:nowrap; flex:0 0 auto; transition:background .14s ease, border-color .14s ease; }
+#tfbar .swlink:hover { background:rgba(56,189,248,.22); border-color:#38bdf8; }
+.suitebar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:14px; }
+.suitebar a { display:inline-flex; align-items:center; gap:6px; text-decoration:none; font-size:12.5px; font-weight:700; padding:6px 12px; border-radius:var(--r); transition:all .15s ease; }
+.suitebar a.sw-nq { background:rgba(56,189,248,.14); color:#7dd3fc; border:1px solid rgba(56,189,248,.4); }
+.suitebar a.sw-nq:hover { background:rgba(56,189,248,.24); color:#fff; border-color:#38bdf8; }
+.suitebar a.sw-hub { background:transparent; color:#c9ccd0; border:1px solid #3a4048; }
+.suitebar a.sw-hub:hover { background:var(--hover); color:var(--fg); }
 #tfbar .sep { width:1px; height:20px; background:var(--line); margin:0 5px; flex:0 0 auto; }
 #tfbar button { border:0; background:transparent; color:var(--fg); border-radius:var(--r); padding:6px 8px; font-size:13px; white-space:nowrap; flex:0 0 auto; font-weight:500; }
 #tfbar button:hover { background:var(--hover); }
